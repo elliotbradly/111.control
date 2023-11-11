@@ -3,13 +3,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
   openFile: () => ipcRenderer.invoke('dialog:openFile'),
-  openGame: ()=> ipcRenderer.invoke('game:openGame'),
-  shapeHexmap: ()=> ipcRenderer.invoke('space:shapeHexmap'),
-  readFocus: ()=> ipcRenderer.invoke('space:readFocus'),
-  readHexmap: (idx)=> ipcRenderer.invoke('space:readHexmap', idx),
-  spinRightFocus: (idx)=> ipcRenderer.invoke('space:spinRightFocus', idx),
-  spinLeftFocus: (idx)=> ipcRenderer.invoke('space:spinLeftFocus', idx),
-  forwardFocus: (idx)=> ipcRenderer.invoke('space:forwardFocus', idx),
+
 
 
 })

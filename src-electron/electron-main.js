@@ -10,25 +10,25 @@ let mainWindow
 const MQTT = require('async-mqtt');
 const PORT = 1001;
 
-const GAME =  require('./game')
+//const GAME =  require('./game')
 //const PLAY = require('../000.play/index.js')
 //const ActPly = require('../000.play/00.play.unit/play.action')
 
 //const STORE = require('../001.store/index.js')
 //const ActStr = require('../001.store/00.store.unit/store.action')
 
-const SPACE = require('../002.space/index.js')
-const ActSpc = require('../002.space/00.space.unit/space.action')
-const ActMap = require('../002.space/03.hexmap.unit/hexmap.action')
-const ActFoc = require('../002.space/01.focus.unit/focus.action')
+//const SPACE = require('../002.space/index.js')
+//const ActSpc = require('../002.space/00.space.unit/space.action')
+//const ActMap = require('../002.space/03.hexmap.unit/hexmap.action')
+//const ActFoc = require('../002.space/01.focus.unit/focus.action')
 
 const local = 'mqtt://localhost:' + PORT;
 
 var bit;
 
-SPACE.hunt(ActSpc.INIT_SPACE, { val: 0, dat: MQTT, src: local })
+//SPACE.hunt(ActSpc.INIT_SPACE, { val: 0, dat: MQTT, src: local })
 
-console.log(JSON.stringify(bit))
+//console.log(JSON.stringify(bit))
 
 async function handleFileOpen() {
   const { canceled, filePaths } = await dialog.showOpenDialog({})
@@ -39,9 +39,7 @@ async function handleFileOpen() {
 
 async function openGame() {
 
-  GAME.open( SPACE );
-
-
+  //GAME.open( SPACE );
 
   //bit = await SPACE.hunt(ActFoc.WRITE_FOCUS, { foc: 'foc00' })
   //bit = await SPACE.hunt(ActFoc.WRITE_FOCUS, { foc: 'foc00' })
@@ -50,55 +48,11 @@ async function openGame() {
   return {intBit:{idx:'game-opened'}}
 }
 
-async function shapeHexmap() {
-  bit = await SPACE.hunt(ActMap.SHAPE_HEXMAP, { idx: 'hex00', dat: { frm: 'rectangle' } })
-  return bit
-}
-
-
 
 async function createWindow() {
 
   ipcMain.handle('dialog:openFile', handleFileOpen)
   ipcMain.handle('game:openGame', openGame)
-  ipcMain.handle('space:shapeHexmap', shapeHexmap)
-
-  ipcMain.handle('space:readFocus', async ( event, idx) => {
-    bit = await SPACE.hunt(ActFoc.READ_FOCUS, { idx })
-    return JSON.stringify(bit)
-  })
-
-  ipcMain.handle('space:readHexmap', async ( event, idx ) => {
-    bit = await SPACE.hunt(ActMap.READ_HEXMAP, { idx })
-    return JSON.stringify(bit)
-  })
-
-  ipcMain.handle('space:spinRightFocus', async ( event, idx) => {
-    bit = await SPACE.hunt(ActFoc.SPIN_RIGHT_FOCUS, { idx })
-    return JSON.stringify(bit)
-  })
-
-  ipcMain.handle('space:spinLeftFocus', async ( event, idx ) => {
-    bit = await SPACE.hunt(ActFoc.SPIN_LEFT_FOCUS, { idx })
-    return JSON.stringify(bit)
-  })
-
-  ipcMain.handle('space:forwardFocus', async ( event, idx ) => {
-
-
-
-    bit = await SPACE.hunt(ActFoc.FORWARD_FOCUS, { idx })
-
-
-    return JSON.stringify(bit)
-  })
-
-
-  ipcMain.handle('space:hexmapFocus', async ( idx) => {
-    bit = await SPACE.hunt(ActMap.READ_HEXMAP, { idx })
-    return bit
-  })
-
 
   /**
    * Initial window options

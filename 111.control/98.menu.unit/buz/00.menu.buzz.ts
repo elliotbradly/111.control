@@ -1,13 +1,13 @@
 import * as ActMnu from "../menu.action";
 
-//import * as ActSpc from "../../00.space.unit/space.action";
+import * as ActCtl from "../../00.control.unit/control.action";
 //import * as ActFoc from "../../01.focus.unit/focus.action";
 //import * as ActPvt from "../../96.pivot.unit/pivot.action";
 
 //import * as ActMap from "../../03.hexmap.unit/hexmap.action"
 
 import * as ActTrm from "../../act/terminal.action";
-import * as ActChc from "../../act/choice.action";
+import * as ActChc from "../../act/choice.action"; 111
 
 import * as ActGrd from "../../act/grid.action";
 import * as ActCvs from "../../act/canvas.action";
@@ -29,39 +29,34 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
   bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: "Control PIVOT V0" })
   bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: "-----------" })
 
- // updateMenu(cpy, bal, ste);
+  updateMenu(cpy, bal, ste);
 
   return cpy;
 };
 
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
-  //lst = [ActPvt.CLOUD_PIVOT, ActPvt.UPDATE_PIVOT, ActPvt.OPEN_PIVOT, ActPvt.EDIT_PIVOT, ActSpc.MERGE_SPACE, ActMnu.FOCUS_MENU, ActMnu.HEXMAP_MENU, , ActMnu.RENDER_MENU]
-
-  //lst = [ActMnu.HEXMAP_MENU, ActMnu.FOCUS_MENU, ActMnu.YIELD_MENU]
+  lst = [ActCtl.UPDATE_CONTROL]
 
   bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 3, ySpan: 12 })
   bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
 
   src = bit.chcBit.src;
 
- // switch (src) {
+  switch (src) {
 
-    //case ActMnu.HEXMAP_MENU:
-    //  bit = await ste.hunt(ActMnu.HEXMAP_MENU, {})
-    //  break;
+    case ActCtl.UPDATE_CONTROL:
+      bit = await ste.hunt(ActCtl.UPDATE_CONTROL, {})
 
-   // case ActMnu.FOCUS_MENU:
-   //   bit = await ste.hunt(ActMnu.FOCUS_MENU, {})
-    //  break;
+      bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: 'updating control....' })
+      break;
 
 
-   // default:
-   //   bit = await ste.bus(ActTrm.CLOSE_TERMINAL, {})
-   //   break;
- // }
+    default:
+      bit = await ste.bus(ActTrm.CLOSE_TERMINAL, {})
+      break;
+  }
 
-  //bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src })
 
   updateMenu(cpy, bal, ste);
 
@@ -97,5 +92,5 @@ import * as Align from '../../val/align'
 import * as Color from '../../val/console-color';
 
 import * as SHAPE from '../../val/shape'
-import * as FOCUS  from "../../val/focus";
+import * as FOCUS from "../../val/focus";
 
