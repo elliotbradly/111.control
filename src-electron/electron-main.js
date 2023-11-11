@@ -52,7 +52,7 @@ async function openGame() {
 async function createWindow() {
 
   ipcMain.handle('dialog:openFile', handleFileOpen)
-  ipcMain.handle('game:openGame', openGame)
+  //ipcMain.handle('game:openGame', openGame)
 
   /**
    * Initial window options
