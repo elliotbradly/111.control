@@ -1,3 +1,3 @@
 cd ../
 cd code
-start Code.exe ../111.menu
+start Code.exe ../111.control
