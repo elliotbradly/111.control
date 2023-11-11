@@ -13,6 +13,9 @@ export function reducer(model: ControlModel = new ControlModel(), act: Act.Actio
  case Act.INIT_CONTROL:
  return Buzz.initControl(clone(model), act.bale, state);
 
+case Act.OPEN_CONTROL:
+ return Buzz.openControl(clone(model), act.bale, state);
+ 
  default:
  return model;
  }

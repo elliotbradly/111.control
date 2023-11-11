@@ -8,6 +8,7 @@ import * as ActBus from "../../99.bus.unit/bus.action";
 
 import * as ActVrt from "../../act/vurt.action"
 import * as ActDsk from "../../act/disk.action"
+import * as ActPvt from "../../act/pivot.action";
 
 var bit, val, idx, dex, lst, dat, src;
 
@@ -25,16 +26,42 @@ export const updateControl = (cpy: ControlModel, bal: ControlBit, ste: State) =>
 
   const { exec } = require('child_process');
 
+  exec('tsc -b 110.shade', async (err, stdout, stderr) => {
+    if (err) {
+      console.error(`exec error: ${err}`);
+    }
+
+    bit = await ste.bus(ActPvt.BUNDLE_PIVOT, { src: "111.control" });
+
+    bit = await ste.bus(ActDsk.READ_DISK, { src: './work/111.control.js' })
+    var shade = bit.dskBit.dat;
+
+    bit = await ste.bus(ActDsk.WRITE_DISK, { src: './public/jsx/111.control.js', dat: shade })
+
+    setTimeout(() => {
+      if (bal.slv != null) bal.slv({ ctlBit: { idx: "update-control" } });
+    }, 3);
+
+  });
+
+  return cpy;
+};
+
+var patch = (ste, type, bale) => ste.dispatch({ type, bale });
+
+export const openControl = (cpy: ControlModel, bal: ControlBit, ste: State) => {
+
+  const { exec } = require('child_process');
+
   exec('quasar dev -m electron', async (err, stdout, stderr) => {
 
-    if (bal.slv != null) bal.slv({ condBit: { idx: "update-control", dat: {} } });
+    if (bal.slv != null) bal.slv({ condBit: { idx: "open-control", dat: {} } });
 
   })
 
   return cpy;
 };
 
-var patch = (ste, type, bale) => ste.dispatch({ type, bale });
 
 import { ControlModel } from "../control.model";
 import ControlBit from "../fce/control.bit";

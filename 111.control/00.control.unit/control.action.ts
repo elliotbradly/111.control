@@ -15,4 +15,11 @@ export class UpdateControl implements Action {
  constructor(public bale: ControlBit) {}
 }
 
-export type Actions = | InitControl | UpdateControl ;
+export const OPEN_CONTROL = "[Open action] Open Control";
+ export class OpenControl implements Action {
+ readonly type = OPEN_CONTROL;
+ constructor(public bale: ControlBit) {}
+ }
+ 
+export type Actions = | InitControl | UpdateControl 
+| OpenControl
