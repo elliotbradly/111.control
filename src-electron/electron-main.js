@@ -59,8 +59,8 @@ async function createWindow() {
    */
   mainWindow = new BrowserWindow({
     icon: path.resolve(__dirname, 'icons/icon.png'), // tray icon
-    width: 480,
-    height: 480,
+    width: 420,
+    height: 420,
     useContentSize: true,
     webPreferences: {
       contextIsolation: true,
@@ -69,12 +69,16 @@ async function createWindow() {
     }
   })
 
-  mainWindow.setPosition(-950, 250);
+  mainWindow.setPosition(1450, 600);
 
   //mainWindow.setPosition(950, 250);
-  mainWindow.maximize();
+  //mainWindow.maximize();
 
   console.log("in the beginning...")
+
+  setTimeout(() => {
+    mainWindow.focus();
+  }, 1200);
 
   // IPC listener
   ipcMain.on('electron-store-get', async (event, val) => {

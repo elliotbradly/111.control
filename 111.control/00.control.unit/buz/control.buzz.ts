@@ -26,7 +26,7 @@ export const updateControl = (cpy: ControlModel, bal: ControlBit, ste: State) =>
 
   const { exec } = require('child_process');
 
-  exec('tsc -b 110.shade', async (err, stdout, stderr) => {
+  exec('tsc -b 111.control', async (err, stdout, stderr) => {
     if (err) {
       console.error(`exec error: ${err}`);
     }
@@ -53,7 +53,7 @@ export const openControl = (cpy: ControlModel, bal: ControlBit, ste: State) => {
 
   const { exec } = require('child_process');
 
-  exec('quasar dev -m electron', async (err, stdout, stderr) => {
+  exec('npx quasar dev -m electron', async (err, stdout, stderr) => {
 
     if (bal.slv != null) bal.slv({ condBit: { idx: "open-control", dat: {} } });
 

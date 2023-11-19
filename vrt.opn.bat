@@ -1,1 +1,1 @@
-quasar dev -m electron
+npx quasar dev -m electron
