@@ -17,6 +17,7 @@ import * as ActVsg from '../110.shade/01.visage.unit/visage.action'
 import * as ActCan from '../110.shade/03.container.unit/container.action'
 
 import {mount, update, unmount } from "../composables/screens"
+import {mountControl } from "../controls/basic"
 
 const router = useRouter()
 const route = useRoute()
@@ -27,6 +28,7 @@ const SHADE = inject('SHADE')
 onMounted(async () => {
 
   mount('on')
+  mountControl('on')
 
   //alert(window.electron.store.get('foo'));
 })
