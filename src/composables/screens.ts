@@ -25,6 +25,7 @@ export const mount = async (value: HelloWorld) => {
 }
 
 export const update = async (value: HelloWorld) => {
+
   console.log('sampleFunc:: ', value)
 
   const instance = getCurrentInstance();
@@ -63,6 +64,26 @@ export const update = async (value: HelloWorld) => {
   bit = await SHADE['hunt'](ActGph.WRITE_GRAPHIC, { idx: 'gph01', dat: { h: 100, w: 40, x: 40, y: 40 } })
   bit = await SHADE['hunt'](ActCan.ADD_CONTAINER, { idx: "can00", dat: { bit: bit.gphBit.dat.bit } })
 
+  bit = await SHADE['hunt'](ActGph.WRITE_GRAPHIC, { idx: 'gph02', dat: { h: 100, w: 40, x: 40, y: 40 } })
+  bit = await SHADE['hunt'](ActCan.ADD_CONTAINER, { idx: "can00", dat: { bit: bit.gphBit.dat.bit } })
+
+
+
+  var bit = await window['electronAPI'].readHexmap('map00')
+  var puff = JSON.parse(bit)
+
+  var map = puff.mapBit.dat.grid
+  bit = await SHADE['hunt'](ActHex.WRITE_HEXAGON, { idx: 'hex00', dat: { src: 'gph00', frm: 'hexmap', sze: 111, bit: map } })
+
+  var bit = await window['electronAPI'].listFocus('avas')
+  var toot = JSON.parse(bit)
+  var list = toot.focBit.lst
+
+  list.forEach( async (a,b)=>{
+    var focus = a;
+    console.log("po " + a.idx )
+     bit = await SHADE['hunt'](ActFcg.WRITE_FOCIGON, { idx: focus.idx, dat: { src: 'gph01', clr:0x0FF000, sze: 111, fce: focus.face, bit: focus } })
+  })
   return value
 }
 

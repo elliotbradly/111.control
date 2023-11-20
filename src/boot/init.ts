@@ -23,5 +23,8 @@ export default boot(async (dat) => {
     src: local,
   });
 
+  var bit = await window['electronAPI'].openGame()
+  console.log(JSON.stringify(bit))
+
   //  var bit = await win.SHADE.hunt( win.SHADE.ActShd.INIT_SHADE, { val: 0, dat: win.MQTT, src: local });
 });
