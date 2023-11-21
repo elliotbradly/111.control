@@ -7,22 +7,70 @@ const keyboard = new Keyboard()
 const gamepad = new Gamepad()
 
 export const mountControl = async (value: HelloWorld) => {
+
+  const bus = inject('bus') // inside setup()
+
   console.log('sampleFunc:: ', value)
 
   var focIDX = 'foc03'
 
+  var render = () => {
+
+    bus.emit('RENDER')
+
+
+  }
+
   const acts = {
-    a: async () => { await window['electronAPI'].spinFocusRight(focIDX) },
-    b: async () => { await window['electronAPI'].spinFocusLeft(focIDX) },
-    x: async () => { await window['electronAPI'].spinFocusRight(focIDX) },
-    y: async () => { await window['electronAPI'].spinFocusLeft(focIDX) },
-    up: async () => { await window['electronAPI'].spinFocusRight(focIDX) },
-    down: async () => { await window['electronAPI'].spinFocusLeft(focIDX) },
-    right: async () => { await window['electronAPI'].forwardFocus(focIDX) },
-    left: async () => { await window['electronAPI'].backwardFocus(focIDX) },
-    back: async () => { await window['electronAPI'].readHexmap(focIDX) },
-    lb: async () => { await window['electronAPI'].readHexmap(focIDX) },
-    rb: async () => { await window['electronAPI'].readHexmap(focIDX) },
+    a: async () => {
+      await window['electronAPI'].spinFocusRight(focIDX)
+      render();
+    },
+    b: async () => {
+      await window['electronAPI'].spinFocusLeft(focIDX)
+      render();
+
+    },
+    x: async () => {
+      await window['electronAPI'].spinFocusRight(focIDX)
+      render();
+
+    },
+    y: async () => {
+      await window['electronAPI'].spinFocusLeft(focIDX)
+      render();
+
+    },
+    up: async () => {
+      await window['electronAPI'].spinFocusRight(focIDX)
+      render();
+
+    },
+    down: async () => {
+      await window['electronAPI'].spinFocusLeft(focIDX)
+      render();
+
+    },
+    right: async () => {
+      await window['electronAPI'].forwardFocus(focIDX)
+      render();
+    },
+    left: async () => {
+      await window['electronAPI'].backwardFocus(focIDX)
+      render();
+    },
+    back: async () => {
+      await window['electronAPI'].readHexmap(focIDX)
+      render();
+    },
+    lb: async () => {
+      await window['electronAPI'].readHexmap(focIDX)
+      render();
+    },
+    rb: async () => {
+      await window['electronAPI'].readHexmap(focIDX)
+      render();
+    },
   }
 
   const controls = {

@@ -21,6 +21,7 @@ export const mount = async (value: HelloWorld) => {
   var bit = await SHADE['hunt'](ActVsg.MOUNT_VISAGE, { idx: "vsg00", src: "indexCanvas", dat: {} });
   instance?.proxy?.$forceUpdate();
 
+
   return value
 }
 
@@ -75,15 +76,34 @@ export const update = async (value: HelloWorld) => {
   var map = puff.mapBit.dat.grid
   bit = await SHADE['hunt'](ActHex.WRITE_HEXAGON, { idx: 'hex00', dat: { src: 'gph00', frm: 'hexmap', sze: 111, bit: map } })
 
+
+
+
   var bit = await window['electronAPI'].listFocus('avas')
   var toot = JSON.parse(bit)
   var list = toot.focBit.lst
 
-  list.forEach( async (a,b)=>{
+  list.forEach(async (a, b) => {
     var focus = a;
-    console.log("po " + a.idx )
-     bit = await SHADE['hunt'](ActFcg.WRITE_FOCIGON, { idx: focus.idx, dat: { src: 'gph01', clr:0x0FF000, sze: 111, fce: focus.face, bit: focus } })
+    console.log("po " + a.idx)
+    bit = await SHADE['hunt'](ActFcg.WRITE_FOCIGON, { idx: focus.idx, dat: { src: 'gph01', clr: 0x0FF000, sze: 111, fce: focus.face, bit: focus } })
   })
+
+
+
+
+
+
+  const bus = inject('bus')
+
+  bus.on('RENDER', (arg1, arg2, arg3) => {
+
+    debugger
+    // do some work
+   })
+
+
+
   return value
 }
 
