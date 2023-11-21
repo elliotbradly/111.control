@@ -90,12 +90,13 @@ async function createWindow() {
   })
 
   ipcMain.handle('space:forwardFocus', async ( event, idx ) => {
-
-
-
     bit = await SPACE.hunt(ActFoc.FORWARD_FOCUS, { idx })
+    return JSON.stringify(bit)
+  })
 
-
+  ipcMain.handle('space:backwardFocus', async ( event, idx ) => {
+    debugger
+    bit = await SPACE.hunt(ActFoc.BACKWARD_FOCUS, { idx })
     return JSON.stringify(bit)
   })
 
