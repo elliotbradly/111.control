@@ -8,8 +8,21 @@ import * as ActSpr from '../110.shade/06.sprite.unit/sprite.action'
 import * as ActHex from '../110.shade/07.hexagon.unit/hexagon.action'
 import * as ActFcg from '../110.shade/08.focigon.unit/focigon.action'
 
-
 export type HelloWorld = string | number
+
+export const render = async (value: HelloWorld) => {
+
+  var bit = await window['electronAPI'].listFocus('avas')
+  var toot = JSON.parse(bit)
+  var list = toot.focBit.lst
+
+  list.forEach(async (a, b) => {
+    var focus = a;
+    console.log("po " + a.idx)
+    bit = await SHADE['hunt'](ActFcg.WRITE_FOCIGON, { idx: focus.idx, dat: { src: 'gph01', clr: 0x0FF000, sze: 111, fce: focus.face, bit: focus } })
+  })
+
+}
 
 
 export const mount = async (value: HelloWorld) => {
@@ -20,7 +33,6 @@ export const mount = async (value: HelloWorld) => {
 
   var bit = await SHADE['hunt'](ActVsg.MOUNT_VISAGE, { idx: "vsg00", src: "indexCanvas", dat: {} });
   instance?.proxy?.$forceUpdate();
-
 
   return value
 }
@@ -75,33 +87,6 @@ export const update = async (value: HelloWorld) => {
 
   var map = puff.mapBit.dat.grid
   bit = await SHADE['hunt'](ActHex.WRITE_HEXAGON, { idx: 'hex00', dat: { src: 'gph00', frm: 'hexmap', sze: 111, bit: map } })
-
-
-
-
-
-  async function gameLoop() {
-
-
-
-  var bit = await window['electronAPI'].listFocus('avas')
-  var toot = JSON.parse(bit)
-  var list = toot.focBit.lst
-
-  list.forEach(async (a, b) => {
-    var focus = a;
-    console.log("po " + a.idx)
-    bit = await SHADE['hunt'](ActFcg.WRITE_FOCIGON, { idx: focus.idx, dat: { src: 'gph01', clr: 0x0FF000, sze: 111, fce: focus.face, bit: focus } })
-  })
-    requestAnimationFrame(gameLoop)
-  }
-
-
-  gameLoop()
-
-
-
-
 
   return value
 }

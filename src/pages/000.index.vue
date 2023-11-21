@@ -1,11 +1,9 @@
 <template>
-
   <div class="full-height row wrap justify-start items-start content-start">
 
     <canvas id="indexCanvas"> </canvas>
 
   </div>
-
 </template>
 
 <script setup>
@@ -16,38 +14,31 @@ import * as ActShd from '../110.shade/00.shade.unit/shade.action'
 import * as ActVsg from '../110.shade/01.visage.unit/visage.action'
 import * as ActCan from '../110.shade/03.container.unit/container.action'
 
-import {mount, update, unmount } from "../composables/screens"
-import {mountControl } from "../controls/basic"
+import { mount, update, unmount, render } from "../composables/screens"
+import { mountControl } from "../controls/basic"
 
 const router = useRouter()
 const route = useRoute()
+const bus = inject('bus')
 
 const instance = getCurrentInstance();
 const SHADE = inject('SHADE')
 
-onMounted(async () => {
+bus.on('RENDER', (arg1, arg2, arg3) => {
+  render()
+})
 
+onMounted(async () => {
   mount('on')
   mountControl('on')
-
-  //alert(window.electron.store.get('foo'));
 })
 
 onUpdated(async () => {
-  // text content should be the same as current `count.value`
-
   update('on')
-
-
+  render()
 })
 
-onUnmounted(async () => {
-
-  //unmount('on')
-
-
-})
-
+onUnmounted(async () => {})
 
 </script>
 

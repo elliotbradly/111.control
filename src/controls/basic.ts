@@ -16,7 +16,7 @@ export const mountControl = async (value: HelloWorld) => {
 
   var render = () => {
 
-   // bus.emit('RENDER')
+   bus.emit('RENDER')
 
 
   }
