@@ -79,6 +79,11 @@ export const update = async (value: HelloWorld) => {
 
 
 
+
+  async function gameLoop() {
+
+
+
   var bit = await window['electronAPI'].listFocus('avas')
   var toot = JSON.parse(bit)
   var list = toot.focBit.lst
@@ -88,19 +93,13 @@ export const update = async (value: HelloWorld) => {
     console.log("po " + a.idx)
     bit = await SHADE['hunt'](ActFcg.WRITE_FOCIGON, { idx: focus.idx, dat: { src: 'gph01', clr: 0x0FF000, sze: 111, fce: focus.face, bit: focus } })
   })
+    requestAnimationFrame(gameLoop)
+  }
 
 
+  gameLoop()
 
 
-
-
-  const bus = inject('bus')
-
-  bus.on('RENDER', (arg1, arg2, arg3) => {
-
-    debugger
-    // do some work
-   })
 
 
 

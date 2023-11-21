@@ -16,38 +16,38 @@ export const mountControl = async (value: HelloWorld) => {
 
   var render = () => {
 
-    bus.emit('RENDER')
+   // bus.emit('RENDER')
 
 
   }
 
   const acts = {
     a: async () => {
-      await window['electronAPI'].spinFocusRight(focIDX)
+      await window['electronAPI'].spinRightFocus(focIDX)
       render();
     },
     b: async () => {
-      await window['electronAPI'].spinFocusLeft(focIDX)
+      await window['electronAPI'].spinLeftFocus(focIDX)
       render();
 
     },
     x: async () => {
-      await window['electronAPI'].spinFocusRight(focIDX)
+      await window['electronAPI'].spinRightFocus(focIDX)
       render();
 
     },
     y: async () => {
-      await window['electronAPI'].spinFocusLeft(focIDX)
+      await window['electronAPI'].spinLeftFocus(focIDX)
       render();
 
     },
     up: async () => {
-      await window['electronAPI'].spinFocusRight(focIDX)
+      await window['electronAPI'].spinRightFocus(focIDX)
       render();
 
     },
     down: async () => {
-      await window['electronAPI'].spinFocusLeft(focIDX)
+      await window['electronAPI'].spinLeftFocus(focIDX)
       render();
 
     },
