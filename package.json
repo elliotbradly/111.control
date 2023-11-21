@@ -28,6 +28,7 @@
     "quasar": "^2.6.0",
     "rx-lite": "^4.0.8",
     "string": "^3.3.3",
+    "terminal-kit": "^3.0.1",
     "typescript-ioc": "^3.2.2",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0",
