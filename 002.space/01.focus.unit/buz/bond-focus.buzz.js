@@ -15,6 +15,8 @@ const bondFocus = async (cpy, bal, ste) => {
     var bonds = {};
     var item;
     var face = bal.src;
+    if (face == null)
+        face = spot.face;
     item = grid.neighborsOf(hex, compassConvertor(face));
     if (item[0] == null) {
         bonds = null;

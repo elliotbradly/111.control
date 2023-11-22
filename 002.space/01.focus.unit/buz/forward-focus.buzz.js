@@ -19,8 +19,10 @@ const forwardFocus = async (cpy, bal, ste) => {
     }
     else {
         const now = bonds[face];
-        x = now.x;
-        y = now.y;
+        if (now != null) {
+            x = now.x;
+            y = now.y;
+        }
     }
     spot.x = x;
     spot.y = y;
