@@ -89,7 +89,7 @@ export const mountControl = async (value: HelloWorld) => {
 
   function gameLoop() {
 
-    console.log("looping")
+
     // Update the UI to reflect the player's input device(s)
     //game.jumpButton.text = controls.jump.label
     //game.menuButton.text = controls.menu.label
