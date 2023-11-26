@@ -1,6 +1,5 @@
 import * as ActMnu from "../../98.menu.unit/menu.action";
 
-
 import * as ActCtr from "../../00.control.unit/control.action";
 
 import * as ActCol from "../../97.collect.unit/collect.action";
@@ -61,6 +60,22 @@ export const openControl = (cpy: ControlModel, bal: ControlBit, ste: State) => {
 
   return cpy;
 };
+
+
+
+export const createControl = (cpy: ControlModel, bal:ControlBit, ste: State) => {
+
+  const { exec } = require('child_process');
+
+  exec('npx quasar build', async (err, stdout, stderr) => {
+
+    if (bal.slv != null) bal.slv({ condBit: { idx: "create-control", dat: {} } });
+
+  })
+
+
+ return cpy;
+ };
 
 
 import { ControlModel } from "../control.model";

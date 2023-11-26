@@ -36,7 +36,7 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
-  lst = [ ActCtl.OPEN_CONTROL,  ActCtl.UPDATE_CONTROL]
+  lst = [ActCtl.OPEN_CONTROL, ActCtl.UPDATE_CONTROL, ActCtl.CREATE_CONTROL]
 
   bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 3, ySpan: 12 })
   bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
@@ -53,6 +53,11 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     case ActCtl.OPEN_CONTROL:
       bit = await ste.hunt(ActCtl.OPEN_CONTROL, {})
       bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: 'open control....' })
+      break;
+
+    case ActCtl.CREATE_CONTROL:
+      bit = await ste.hunt(ActCtl.CREATE_CONTROL, {})
+      bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: 'create control....' })
       break;
 
 

@@ -12,7 +12,7 @@ const routes = [
     path: '/gameScreen',
     component: () => import('layouts/SimpleLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/GameScreen.vue') }
+      { path: '', component: () => import('pages/000.index.vue') }
     ]
   },
 
@@ -21,7 +21,7 @@ const routes = [
     path: '/gameTest',
     component: () => import('layouts/SimpleLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/TestPageTwo.vue') }
+      { path: '', component: () => import('pages/000.index.vue') }
     ]
   },
 
