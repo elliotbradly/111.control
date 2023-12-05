@@ -63,8 +63,8 @@ const init = async (prt) => {
     CONTROL = require(path.resolve('./dist/111.control/hunt'));
     CONTROL_ACTION = require(path.resolve('./dist/111.control/00.control.unit/control.action'));
 
-    //SPACE = require(path.resolve('./002.space/index'));
-    //SPACE_ACTION = require(path.resolve('./002.space/00.space.unit/space.action'));
+    BEING = require(path.resolve('./004.being/index'));
+    BEING_ACTION = require(path.resolve('./004.being/00.being.unit/being.action'));
 
     PIVOT = require(path.resolve('./999.pivot/index'));
     PIVOT_ACTION = require(path.resolve('./999.pivot/00.pivot.unit/pivot.action'));
@@ -76,7 +76,7 @@ const init = async (prt) => {
 
       await TERMINAL.hunt( TERMINAL_ACTION.INIT_TERMINAL, { dat: MQTT, src: local });
       await PIVOT.hunt( PIVOT_ACTION.INIT_PIVOT, {  dat: MQTT, src: local });
-      //await SPACE.hunt( SPACE_ACTION.INIT_SPACE, {  dat: MQTT, src: local });
+      await BEING.hunt( BEING_ACTION.INIT_BEING, {  dat: MQTT, src: local });
       await CONTROL.hunt( CONTROL_ACTION.INIT_CONTROL , { val: 1, dat: MQTT, src:  [localBit]  });
 
     }
