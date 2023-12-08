@@ -7,6 +7,7 @@ class GeojsonModel {
         //geojsonBitList: GeojsonBit[] = [];
         //geojsonBits: any = {};
         this.geoSrc = './data/geojson';
+        this.captureLocationList = ['https://geoman.io/geojson-editor', 'https://www.keene.edu/campus/maps/tool/'];
     }
 }
 exports.GeojsonModel = GeojsonModel;

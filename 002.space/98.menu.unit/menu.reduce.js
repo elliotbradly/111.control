@@ -31,6 +31,8 @@ function reducer(model = new menu_model_1.MenuModel(), act, state) {
             return Buzz.focusPlayMenu(clone(model), act.bale, state);
         case Act.UPDATE_FOCUS_PLAY_MENU:
             return Buzz.updateFocusPlayMenu(clone(model), act.bale, state);
+        case Act.GEOJSON_MENU:
+            return Buzz.geojsonMenu(clone(model), act.bale, state);
         default:
             return model;
     }
