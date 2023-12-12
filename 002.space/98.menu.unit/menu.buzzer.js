@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.renderMenu = exports.createHexmapMenu = exports.hexmapMenu = exports.yieldMenu = exports.createMenu = exports.updateFocusPlayMenu = exports.focusPlayMenu = exports.focusMenu = exports.closeMenu = exports.testMenu = exports.updateMenu = exports.initMenu = void 0;
+exports.geojsonMenu = exports.renderMenu = exports.createHexmapMenu = exports.hexmapMenu = exports.yieldMenu = exports.createMenu = exports.updateFocusPlayMenu = exports.focusPlayMenu = exports.focusMenu = exports.closeMenu = exports.testMenu = exports.updateMenu = exports.initMenu = void 0;
 var _00_menu_buzz_1 = require("./buz/00.menu.buzz");
 Object.defineProperty(exports, "initMenu", { enumerable: true, get: function () { return _00_menu_buzz_1.initMenu; } });
 var _00_menu_buzz_2 = require("./buz/00.menu.buzz");
@@ -25,4 +25,6 @@ var create_hexmap_menu_buzz_1 = require("./buz/create-hexmap-menu.buzz");
 Object.defineProperty(exports, "createHexmapMenu", { enumerable: true, get: function () { return create_hexmap_menu_buzz_1.createHexmapMenu; } });
 var render_menu_buzz_1 = require("./buz/render-menu.buzz");
 Object.defineProperty(exports, "renderMenu", { enumerable: true, get: function () { return render_menu_buzz_1.renderMenu; } });
+var _04_geojson_menu_buzz_1 = require("./buz/04.geojson-menu.buzz");
+Object.defineProperty(exports, "geojsonMenu", { enumerable: true, get: function () { return _04_geojson_menu_buzz_1.geojsonMenu; } });
 //# sourceMappingURL=menu.buzzer.js.map

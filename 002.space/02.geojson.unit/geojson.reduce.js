@@ -15,6 +15,10 @@ function reducer(model = new geojson_model_1.GeojsonModel(), act, state) {
             return Buzz.loadGeojson(clone(model), act.bale, state);
         case Act.INDEX_GEOJSON:
             return Buzz.indexGeojson(clone(model), act.bale, state);
+        case Act.CAPTURE_GEOJSON:
+            return Buzz.captureGeojson(clone(model), act.bale, state);
+        case Act.SAVE_GEOJSON:
+            return Buzz.saveGeojson(clone(model), act.bale, state);
         default:
             return model;
     }
