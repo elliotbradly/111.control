@@ -8,11 +8,11 @@
     <div class="q-pa-md q-gutter-y-md column items-start">
 
       <q-btn-group spread>
-        <q-btn color="amber" glossy text-color="black" push label="backward" />
-        <q-btn color="yellow" glossy text-color="black" push label="spin cntrclock" />
-        <q-btn color="green" glossy text-color="black" push label="forward" />
-        <q-btn color="yellow" glossy text-color="black" push label="spin clockwise" />
-        <q-btn color="amber" glossy text-color="black" push label="backward" />
+        <q-btn @click="outside(0, $event)" color="amber" glossy text-color="black" push label="backward" />
+        <q-btn @click="outside(1, $event)" color="yellow" glossy text-color="black" push label="spin cntrclock" />
+        <q-btn @click="outside(2, $event)" color="green" glossy text-color="black" push label="forward" />
+        <q-btn @click="outside(3, $event)" color="yellow" glossy text-color="black" push label="spin clockwise" />
+        <q-btn @click="outside(4, $event)" color="amber" glossy text-color="black" push label="backward" />
       </q-btn-group>
 
     </div>
@@ -36,6 +36,15 @@ const bus = inject('bus')
 
 const instance = getCurrentInstance();
 const SHADE = inject('SHADE')
+
+const outside = (val, event)=>{
+
+
+
+  alert(val)
+
+}
+
 
 bus.on('RENDER', (arg1, arg2, arg3) => {
   render()
