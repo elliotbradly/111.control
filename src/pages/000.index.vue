@@ -1,8 +1,21 @@
 <template>
-  <div class="full-height row wrap justify-start items-start content-start">
+  <div class="fullscreen absolute-center">
 
-    <canvas id="indexCanvas"> </canvas>
+    <div class="self-center">
+      <canvas id="indexCanvas" style="position:relative; bottom:40px; right:75px"> </canvas>
+    </div>
 
+    <div class="q-pa-md q-gutter-y-md column items-start">
+
+      <q-btn-group spread>
+        <q-btn color="amber" glossy text-color="black" push label="backward" />
+        <q-btn color="yellow" glossy text-color="black" push label="spin cntrclock" />
+        <q-btn color="green" glossy text-color="black" push label="forward" />
+        <q-btn color="yellow" glossy text-color="black" push label="spin clockwise" />
+        <q-btn color="amber" glossy text-color="black" push label="backward" />
+      </q-btn-group>
+
+    </div>
   </div>
 </template>
 
@@ -38,7 +51,7 @@ onUpdated(async () => {
   render()
 })
 
-onUnmounted(async () => {})
+onUnmounted(async () => { })
 
 </script>
 
