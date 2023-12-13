@@ -27,7 +27,7 @@ import * as ActShd from '../110.shade/00.shade.unit/shade.action'
 import * as ActVsg from '../110.shade/01.visage.unit/visage.action'
 import * as ActCan from '../110.shade/03.container.unit/container.action'
 
-import { mount, update, unmount, render } from "../composables/screens"
+import { mount, update, unmount} from "../composables/screens"
 import { mountControl } from "../controls/basic"
 
 const router = useRouter()
@@ -37,30 +37,31 @@ const bus = inject('bus')
 const instance = getCurrentInstance();
 const SHADE = inject('SHADE')
 
+var intervalID;
+
 const outside = (val, event)=>{
-
-
 
   alert(val)
 
 }
 
+const response = (val, event)=>{
 
-bus.on('RENDER', (arg1, arg2, arg3) => {
-  render()
-})
+console.log( 'rendering...' )
+
+}
 
 onMounted(async () => {
-  mount('on')
-  mountControl('on')
+  //mount('on')
+
+  intervalID = setInterval( response, 1111)
+
+  //mountControl('on')
 })
 
-onUpdated(async () => {
-  update('on')
-  render()
-})
+onUpdated(async () => {})
 
-onUnmounted(async () => { })
+onUnmounted(async () => { clearInterval( intervalID ) })
 
 </script>
 

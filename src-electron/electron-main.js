@@ -11,8 +11,11 @@ const MQTT = require('async-mqtt');
 const PORT = 1001;
 
 const GAME =  require('./game')
-//const PLAY = require('../000.play/index.js')
-//const ActPly = require('../000.play/00.play.unit/play.action')
+
+//every time you restart you recompile the control source code
+
+const CONTROL = require('../dist/111.control/hunt.js')
+const ActCtl = require('../dist/111.control/00.control.unit/control.action')
 
 //const STORE = require('../001.store/index.js')
 //const ActStr = require('../001.store/00.store.unit/store.action')
@@ -27,6 +30,8 @@ const local = 'mqtt://localhost:' + PORT;
 var bit;
 
 SPACE.hunt(ActSpc.INIT_SPACE, { val: 0, dat: MQTT, src: local })
+CONTROL.hunt(ActCtl.INIT_CONTROL, { val: 0, dat: MQTT, src: local })
+
 
 console.log(JSON.stringify(bit))
 

@@ -16,7 +16,7 @@ export const initControl = async (cpy: ControlModel, bal: ControlBit, ste: State
   if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActCtr], dat: bal.dat, src: bal.src })
 
   if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
-  if (bal.slv != null) bal.slv({ intBit: { idx: "init-space" } });
+  if (bal.slv != null) bal.slv({ intBit: { idx: "init-control" } });
 
   return cpy;
 };
@@ -46,8 +46,6 @@ export const updateControl = (cpy: ControlModel, bal: ControlBit, ste: State) =>
   return cpy;
 };
 
-var patch = (ste, type, bale) => ste.dispatch({ type, bale });
-
 export const openControl = (cpy: ControlModel, bal: ControlBit, ste: State) => {
 
   const { exec } = require('child_process');
@@ -61,9 +59,7 @@ export const openControl = (cpy: ControlModel, bal: ControlBit, ste: State) => {
   return cpy;
 };
 
-
-
-export const createControl = (cpy: ControlModel, bal:ControlBit, ste: State) => {
+export const createControl = (cpy: ControlModel, bal: ControlBit, ste: State) => {
 
   const { exec } = require('child_process');
 
@@ -74,9 +70,11 @@ export const createControl = (cpy: ControlModel, bal:ControlBit, ste: State) => 
   })
 
 
- return cpy;
- };
+  return cpy;
+};
 
+
+var patch = (ste, type, bale) => ste.dispatch({ type, bale });
 
 import { ControlModel } from "../control.model";
 import ControlBit from "../fce/control.bit";
