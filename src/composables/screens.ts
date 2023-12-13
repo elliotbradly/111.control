@@ -7,6 +7,8 @@ import * as ActGph from '../110.shade/04.graphic.unit/graphic.action'
 import * as ActSpr from '../110.shade/06.sprite.unit/sprite.action'
 import * as ActHex from '../110.shade/07.hexagon.unit/hexagon.action'
 import * as ActFcg from '../110.shade/08.focigon.unit/focigon.action'
+import * as ActCam from '../110.shade/13.camera.unit/camera.action'
+
 
 export type HelloWorld = string | number
 
@@ -17,9 +19,19 @@ export const render = async (value: HelloWorld) => {
   var list = toot.focBit.lst
 
   list.forEach(async (a, b) => {
+
+    bit = await SHADE['hunt'](ActCan.READ_CONTAINER, { idx: "can00", src: 'vsg00' })
+   var container = bit.canBit.dat.bit
+
     var focus = a;
     console.log("po " + a.idx)
     bit = await SHADE['hunt'](ActFcg.WRITE_FOCIGON, { idx: focus.idx, dat: { src: 'gph01', clr: 0x0FF000, sze: 111, fce: focus.face, bit: focus } })
+    var graphic = bit.fcgBit.dat.bit
+
+
+    bit = await SHADE['hunt'](ActCam.WRITE_CAMERA, { idx: 'cam00', src: 'vsg00', dat: { x: focus.x, y: focus.y, can: container, bit: graphic } })
+
+
   })
 
 }
@@ -31,7 +43,7 @@ export const mount = async (value: HelloWorld) => {
   const instance = getCurrentInstance();
   const SHADE = inject('SHADE')
 
-  var bit = await SHADE['hunt'](ActVsg.MOUNT_VISAGE, { idx: "vsg00", src: "indexCanvas", dat: {} });
+  var bit = await SHADE['hunt'](ActVsg.MOUNT_VISAGE, { idx: "vsg00", src: "indexCanvas", dat: {width:720, height:720} });
   instance?.proxy?.$forceUpdate();
 
   return value
@@ -45,7 +57,7 @@ export const update = async (value: HelloWorld) => {
   const SHADE = inject('SHADE')
 
   var bit = await SHADE['hunt'](ActVsg.REMOVE_VISAGE, { idx: "vsg00" })
-  bit = await SHADE['hunt'](ActVsg.MOUNT_VISAGE, { idx: "vsg00", src: "indexCanvas", dat: {} })
+  bit = await SHADE['hunt'](ActVsg.MOUNT_VISAGE, { idx: "vsg00", src: "indexCanvas", dat: {width:720, height:720} })
 
   bit = await SHADE['hunt'](ActVsg.READ_VISAGE, { idx: "vsg00" })
 
@@ -56,30 +68,8 @@ export const update = async (value: HelloWorld) => {
 
   bit = await SHADE['hunt'](ActCan.ADD_CONTAINER, { idx: "fce-can-00", dat: { bit: container } })
 
-  //bit = await SHADE['hunt']( ActTxt.WRITE_TEXT, { idx:'txt00', dat: {  txt: "text 00" }  })
-  //bit = await SHADE['hunt']( ActCan.ADD_CONTAINER, { idx: "can00",  dat:{bit:bit.txtBit.dat.bit }})
-
-  //bit = await SHADE['hunt']( ActTxt.WRITE_TEXT, { idx:'txt01', dat: {  txt: "text 01", y:15 }  })
-  //bit = await SHADE['hunt']( ActCan.ADD_CONTAINER, { idx: "can00",  dat:{bit:bit.txtBit.dat.bit }})
-
-  //bit = await SHADE['hunt']( ActTxt.WRITE_TEXT, { idx:'txt02', dat: {  txt: "text 02", y:30 }  })
-  //bit = await SHADE['hunt']( ActCan.ADD_CONTAINER, { idx: "can00",  dat:{bit:bit.txtBit.dat.bit }})
-
-  //bit = await SHADE['hunt']( ActTxt.WRITE_TEXT, { idx:'txt03', dat: {  txt: "text 03", y:45 }  })
-  //bit = await SHADE['hunt']( ActCan.ADD_CONTAINER, { idx: "can00",  dat:{bit:bit.txtBit.dat.bit }})
-
-  //bit = await SHADE['hunt']( ActSpr.WRITE_SPRITE, { idx:'spr00', dat: { src:'./img/000.png',  x:40, y:80 }  })
-  //bit = await SHADE['hunt']( ActCan.ADD_CONTAINER, { idx: "can00",  dat:{bit:bit.sprBit.dat.bit }})
-
-  bit = await SHADE['hunt'](ActGph.WRITE_GRAPHIC, { idx: 'gph00', dat: { h: 100, w: 40, x: 40, y: 40 } })
+  bit = await SHADE['hunt'](ActGph.WRITE_GRAPHIC, { idx: 'gph00', dat: {} })
   bit = await SHADE['hunt'](ActCan.ADD_CONTAINER, { idx: "can00", dat: { bit: bit.gphBit.dat.bit } })
-
-  bit = await SHADE['hunt'](ActGph.WRITE_GRAPHIC, { idx: 'gph01', dat: { h: 100, w: 40, x: 40, y: 40 } })
-  bit = await SHADE['hunt'](ActCan.ADD_CONTAINER, { idx: "can00", dat: { bit: bit.gphBit.dat.bit } })
-
-  bit = await SHADE['hunt'](ActGph.WRITE_GRAPHIC, { idx: 'gph02', dat: { h: 100, w: 40, x: 40, y: 40 } })
-  bit = await SHADE['hunt'](ActCan.ADD_CONTAINER, { idx: "can00", dat: { bit: bit.gphBit.dat.bit } })
-
 
 
   var bit = await window['electronAPI'].readHexmap('map00')
