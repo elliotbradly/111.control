@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createMenu = exports.closeMenu = exports.testMenu = exports.updateMenu = exports.initMenu = void 0;
 const ActCyp = require("../../00.crypto.unit/crypto.action");
 const ActCar = require("../../01.cardano.unit/cardano.action");
+const ActBlk = require("../../03.block.unit/block.action");
 const ActTrm = require("../../act/terminal.action");
 const ActChc = require("../../act/choice.action");
 const ActGrd = require("../../act/grid.action");
@@ -25,11 +26,23 @@ const initMenu = async (cpy, bal, ste) => {
 exports.initMenu = initMenu;
 const updateMenu = async (cpy, bal, ste) => {
     //lst = [ActPvt.CLOUD_PIVOT, ActPvt.UPDATE_PIVOT, ActPvt.OPEN_PIVOT, ActPvt.EDIT_PIVOT, ActSpc.MERGE_SPACE, ActMnu.FOCUS_MENU, ActMnu.HEXMAP_MENU, , ActMnu.RENDER_MENU]
-    lst = [ActCyp.UPDATE_CRYPTO, ActCar.READ_CARDANO];
+    lst = [ActBlk.WRITE_BLOCK, ActCyp.UPDATE_CRYPTO, ActCar.READ_CARDANO];
     bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 4, ySpan: 12 });
     bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat });
     src = bit.chcBit.src;
     switch (src) {
+        case ActBlk.WRITE_BLOCK:
+            ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: '------------' });
+            bit = await ste.hunt(ActBlk.OPEN_BLOCK, { idx: 'blk00' });
+            bit = await ste.hunt(ActBlk.WRITE_BLOCK, { idx: 'blk00' });
+            dat = bit.blkBit.dat;
+            if (bit == null)
+                break;
+            var itm = JSON.stringify(dat);
+            lst = itm.split(',');
+            lst.forEach((a) => ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: a }));
+            ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: '------------' });
+            break;
         case ActCyp.UPDATE_CRYPTO:
             bit = await ste.hunt(ActCyp.UPDATE_CRYPTO, {});
             break;

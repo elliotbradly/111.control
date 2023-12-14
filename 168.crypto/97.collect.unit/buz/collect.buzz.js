@@ -55,7 +55,6 @@ const writeCollect = async (cpy, bal, ste) => {
     if ((bal.bit == null))
         bal.slv({ rskBit: { idx: "write-collect-err", src: 'no-bit' } });
     var cabBit = cpy.caboodleBitList[cpy.caboodleBits[type]];
-    bal.idx;
     if (cabBit.bits[bal.idx] == null) {
         bit = await ste.hunt(bal.bit, { idx: bal.idx, src: bal.src, dat: bal.dat });
         var objDat = bit[Object.keys(bit)[0]];
@@ -70,24 +69,28 @@ const writeCollect = async (cpy, bal, ste) => {
         if (idx == null)
             throw new Error("write collect has no idx");
         cabBit.bits[idx] = dat.dex;
+        bal.slv({ clcBit: { idx: "write-collect-init", dat } });
+        return cpy;
     }
     else {
         var cabDat = cabBit.bitList[cabBit.bits[bal.idx]];
         bal.dat;
+        if (bal.dat == null)
+            bal.dat = {};
         for (var key in bal.dat) {
             if (cabDat == null)
                 cabDat = {};
             cabDat[key] = bal.dat[key];
         }
         cabBit.bitList[cabBit.bits[bal.idx]] = cabDat;
-        dat = cabBit;
+        bal.slv({ clcBit: { idx: "write-collect-update", dat: cabDat } });
+        return cpy;
         //!!! SUPER IMPORTANT
     }
     if ((dat == null) && (bal.slv != null))
         bal.slv({ rskBit: { idx: "write-collect-err", src: 'no-dat' } });
     if (bal.slv != null)
-        bal.slv({ clcBit: { idx: "write-collect", dat } });
-    return cpy;
+        return cpy;
 };
 exports.writeCollect = writeCollect;
 const createCollect = (cpy, bal, ste) => {

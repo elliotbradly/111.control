@@ -21,6 +21,12 @@ function reducer(model = new block_model_1.BlockModel(), act, state) {
             return Buzz.deleteBlock(clone(model), act.bale, state);
         case Act.CREATE_BLOCK:
             return Buzz.createBlock(clone(model), act.bale, state);
+        case Act.NOW_BLOCK:
+            return Buzz.nowBlock(clone(model), act.bale, state);
+        case Act.OPEN_BLOCK:
+            return Buzz.openBlock(clone(model), act.bale, state);
+        case Act.HASH_BLOCK:
+            return Buzz.hashBlock(clone(model), act.bale, state);
         default:
             return model;
     }

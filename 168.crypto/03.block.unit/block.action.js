@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateBlock = exports.CREATE_BLOCK = exports.DeleteBlock = exports.DELETE_BLOCK = exports.RemoveBlock = exports.REMOVE_BLOCK = exports.WriteBlock = exports.WRITE_BLOCK = exports.ReadBlock = exports.READ_BLOCK = exports.UpdateBlock = exports.UPDATE_BLOCK = exports.InitBlock = exports.INIT_BLOCK = void 0;
+exports.HashBlock = exports.HASH_BLOCK = exports.OpenBlock = exports.OPEN_BLOCK = exports.NowBlock = exports.NOW_BLOCK = exports.CreateBlock = exports.CREATE_BLOCK = exports.DeleteBlock = exports.DELETE_BLOCK = exports.RemoveBlock = exports.REMOVE_BLOCK = exports.WriteBlock = exports.WRITE_BLOCK = exports.ReadBlock = exports.READ_BLOCK = exports.UpdateBlock = exports.UPDATE_BLOCK = exports.InitBlock = exports.INIT_BLOCK = void 0;
 // Block actions
 exports.INIT_BLOCK = "[Block action] Init Block";
 class InitBlock {
@@ -58,4 +58,28 @@ class CreateBlock {
     }
 }
 exports.CreateBlock = CreateBlock;
+exports.NOW_BLOCK = "[Now action] Now Block";
+class NowBlock {
+    constructor(bale) {
+        this.bale = bale;
+        this.type = exports.NOW_BLOCK;
+    }
+}
+exports.NowBlock = NowBlock;
+exports.OPEN_BLOCK = "[Open action] Open Block";
+class OpenBlock {
+    constructor(bale) {
+        this.bale = bale;
+        this.type = exports.OPEN_BLOCK;
+    }
+}
+exports.OpenBlock = OpenBlock;
+exports.HASH_BLOCK = "[Hash action] Hash Block";
+class HashBlock {
+    constructor(bale) {
+        this.bale = bale;
+        this.type = exports.HASH_BLOCK;
+    }
+}
+exports.HashBlock = HashBlock;
 //# sourceMappingURL=block.action.js.map
