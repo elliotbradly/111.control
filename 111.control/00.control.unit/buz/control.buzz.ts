@@ -25,11 +25,25 @@ export const initControl = async (cpy: ControlModel, bal: ControlBit, ste: State
 
 export const updateControl = async (cpy: ControlModel, bal: ControlBit, ste: State) => {
 
-  bit = await ste.bus(ActPvt.UPDATE_PIVOT, { src: '111.control' })
+  const { exec } = require('child_process');
+
+  exec('tsc -b 111.control', async (err, stdout, stderr) => {
+    if (err) {
+      console.error(`exec error: ${err}`);
+    }
+
+    bit = await ste.bus(ActPvt.BUNDLE_PIVOT, { src: "111.control" });
+
+    bit = await ste.bus(ActDsk.READ_DISK, { src: './work/111.control.js' })
+    var shade = bit.dskBit.dat;
+
+    bit = await ste.bus(ActDsk.WRITE_DISK, { src: './public/jsx/111.control.js', dat: shade })
 
     setTimeout(() => {
       if (bal.slv != null) bal.slv({ ctlBit: { idx: "update-control" } });
     }, 3);
+
+  });
 
   return cpy;
 };
