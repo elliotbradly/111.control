@@ -27,6 +27,13 @@ export const CREATE_CONTROL = "[Create action] Create Control";
  constructor(public bale: ControlBit) {}
  }
  
+export const TEST_CONTROL = "[Test action] Test Control";
+ export class TestControl implements Action {
+ readonly type = TEST_CONTROL;
+ constructor(public bale: ControlBit) {}
+ }
+ 
 export type Actions = | InitControl | UpdateControl 
 | OpenControl
 | CreateControl
+| TestControl

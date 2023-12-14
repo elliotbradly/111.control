@@ -46,8 +46,6 @@ async function openGame() {
 
   GAME.open( SPACE );
 
-
-
   //bit = await SPACE.hunt(ActFoc.WRITE_FOCUS, { foc: 'foc00' })
   //bit = await SPACE.hunt(ActFoc.WRITE_FOCUS, { foc: 'foc00' })
 

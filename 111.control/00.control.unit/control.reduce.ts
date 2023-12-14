@@ -19,6 +19,9 @@ case Act.OPEN_CONTROL:
 case Act.CREATE_CONTROL:
  return Buzz.createControl(clone(model), act.bale, state);
  
+case Act.TEST_CONTROL:
+ return Buzz.testControl(clone(model), act.bale, state);
+ 
  default:
  return model;
  }

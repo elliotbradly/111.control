@@ -3,6 +3,8 @@ const fs = require('fs');
 const MQTT = require('async-mqtt');
 const { program } = require('commander');
 
+require('dotenv').config()
+
 const PORT = 1001;
 const wsPort = 8883;
 
@@ -36,18 +38,18 @@ httpServer.listen(wsPort, function () {
 });
 
 server.listen(PORT, async () => {
-    console.log('server started and listening on port ', PORT);
+  console.log('server started and listening on port ', PORT);
 
-    var exec  = require('child_process').exec;
+  var exec = require('child_process').exec;
 
-    exec('tsc -b 111.control', async (err, stdout, stderr) => {
-        if (err) {
-            console.error(`exec error: ${err}`);
-        }
+  exec('tsc -b 111.control', async (err, stdout, stderr) => {
+    if (err) {
+      console.error(`exec error: ${err}`);
+    }
 
-        init(PORT);
+    init(PORT);
 
-        })
+  })
 
 
 });
@@ -55,36 +57,41 @@ server.listen(PORT, async () => {
 
 const init = async (prt) => {
 
-    console.log("inits")
+  console.log("inits")
 
-    const local = 'mqtt://localhost:' + prt;
-    const localBit = { idx: 'local', src: local };
+  const local = 'mqtt://localhost:' + prt;
+  const localBit = { idx: 'local', src: local };
 
-    CONTROL = require(path.resolve('./dist/111.control/hunt'));
-    CONTROL_ACTION = require(path.resolve('./dist/111.control/00.control.unit/control.action'));
+  CONTROL = require(path.resolve('./dist/111.control/hunt'));
+  CONTROL_ACTION = require(path.resolve('./dist/111.control/00.control.unit/control.action'));
 
-    BEING = require(path.resolve('./004.being/index'));
-    BEING_ACTION = require(path.resolve('./004.being/00.being.unit/being.action'));
+  CRYPTO = require(path.resolve('./168.crypto/index'));
+  CRYPTO_ACTION = require(path.resolve('./168.crypto/00.crypto.unit/crypto.action'));
 
-    PIVOT = require(path.resolve('./999.pivot/index'));
-    PIVOT_ACTION = require(path.resolve('./999.pivot/00.pivot.unit/pivot.action'));
+  BEING = require(path.resolve('./004.being/index'));
+  BEING_ACTION = require(path.resolve('./004.being/00.being.unit/being.action'));
 
-    TERMINAL = require(path.resolve('./997.terminal/index'));
-    TERMINAL_ACTION = require(path.resolve('./997.terminal/00.terminal.unit/terminal.action'));
+  PIVOT = require(path.resolve('./999.pivot/index'));
+  PIVOT_ACTION = require(path.resolve('./999.pivot/00.pivot.unit/pivot.action'));
 
-    if ( pvt == false){
+  TERMINAL = require(path.resolve('./997.terminal/index'));
+  TERMINAL_ACTION = require(path.resolve('./997.terminal/00.terminal.unit/terminal.action'));
 
-      await TERMINAL.hunt( TERMINAL_ACTION.INIT_TERMINAL, { dat: MQTT, src: local });
-      await PIVOT.hunt( PIVOT_ACTION.INIT_PIVOT, {  dat: MQTT, src: local });
-      await BEING.hunt( BEING_ACTION.INIT_BEING, {  dat: MQTT, src: local });
-      await CONTROL.hunt( CONTROL_ACTION.INIT_CONTROL , { val: 1, dat: MQTT, src:  [localBit]  });
+  if (pvt == false) {
 
-    }
-    else{
+    await TERMINAL.hunt(TERMINAL_ACTION.INIT_TERMINAL, { dat: MQTT, src: local });
+    await PIVOT.hunt(PIVOT_ACTION.INIT_PIVOT, { dat: MQTT, src: local });
+    await BEING.hunt(BEING_ACTION.INIT_BEING, { dat: MQTT, src: local });
+    await CRYPTO.hunt(CRYPTO_ACTION.INIT_CRYPTO, { dat: MQTT, src: local });
 
-      await PIVOT.hunt( PIVOT_ACTION.INIT_PIVOT, { val:1, dat: MQTT, src: local });
-      //await SHADE.hunt( SHADE_ACTION.INIT_SHADE , { val: 1, dat: MQTT, src:  [localBit]  });
-    }
+    await CONTROL.hunt(CONTROL_ACTION.INIT_CONTROL, { val: 1, dat: MQTT, src: [localBit] });
+
+  }
+  else {
+
+    await PIVOT.hunt(PIVOT_ACTION.INIT_PIVOT, { val: 1, dat: MQTT, src: local });
+    //await SHADE.hunt( SHADE_ACTION.INIT_SHADE , { val: 1, dat: MQTT, src:  [localBit]  });
+  }
 
 
 };
@@ -94,8 +101,8 @@ const init = async (prt) => {
 const close = async () => {
 
 
-    var run = fs.readFileSync("./run.cjs").toString()
-    fs.writeFileSync("./run.cjs", run)
+  var run = fs.readFileSync("./run.cjs").toString()
+  fs.writeFileSync("./run.cjs", run)
 
 }
 
@@ -113,47 +120,47 @@ var pivot = exec("pnpm watch")
 process.chdir("./111.control");
 
 pivot.stderr.on('data', function (data) {
-    //console.log('aaads stderr: ' + data.toString());
+  //console.log('aaads stderr: ' + data.toString());
 });
 
 let errored = false
 let working = false
 
 pivot.stdout.on('data', async (data) => {
-    if (data.length < 3) return
+  if (data.length < 3) return
 
-    if (data.includes('Watching for file changes.') == false) return
-    if (data.includes('Found 0 errors.') == true) {
+  if (data.includes('Watching for file changes.') == false) return
+  if (data.includes('Found 0 errors.') == true) {
 
-        if (errored == false) {
+    if (errored == false) {
 
-            if (working == false) {
+      if (working == false) {
 
-                setTimeout(() => working = true, 3333)
-
-                return
-            }
-
-            bit = await close()
-            bit = await init(PORT)
-
-            return
-        }
-
-        errored = false
-
-        //now reset the game
-        bit = await close()
-        bit = await init(PORT)
+        setTimeout(() => working = true, 3333)
 
         return
+      }
 
+      bit = await close()
+      bit = await init(PORT)
+
+      return
     }
 
+    errored = false
 
-    if (data.includes('Debugger') == true) return
-    data
-    errored = true;
+    //now reset the game
+    bit = await close()
+    bit = await init(PORT)
+
+    return
+
+  }
+
+
+  if (data.includes('Debugger') == true) return
+  data
+  errored = true;
 
 
 });

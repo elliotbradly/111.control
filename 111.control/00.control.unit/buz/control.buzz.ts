@@ -9,6 +9,8 @@ import * as ActVrt from "../../act/vurt.action"
 import * as ActDsk from "../../act/disk.action"
 import * as ActPvt from "../../act/pivot.action";
 
+import * as ActCrd from "../../act/cardano.action";
+
 var bit, val, idx, dex, lst, dat, src;
 
 export const initControl = async (cpy: ControlModel, bal: ControlBit, ste: State) => {
@@ -73,8 +75,20 @@ export const createControl = (cpy: ControlModel, bal: ControlBit, ste: State) =>
   return cpy;
 };
 
+export const testControl = async (cpy: ControlModel, bal:ControlBit, ste: State) => {
+
+  bit = await ste.bus( ActCrd.READ_CARDANO, {})
+
+  if (bal.slv != null) bal.slv({ condBit: { idx: "test-control", dat: {} } });
+
+  return cpy;
+  };
+
 
 var patch = (ste, type, bale) => ste.dispatch({ type, bale });
+
+
+
 
 import { ControlModel } from "../control.model";
 import ControlBit from "../fce/control.bit";
