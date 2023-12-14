@@ -23,27 +23,13 @@ export const initControl = async (cpy: ControlModel, bal: ControlBit, ste: State
   return cpy;
 };
 
-export const updateControl = (cpy: ControlModel, bal: ControlBit, ste: State) => {
+export const updateControl = async (cpy: ControlModel, bal: ControlBit, ste: State) => {
 
-  const { exec } = require('child_process');
-
-  exec('tsc -b 111.control', async (err, stdout, stderr) => {
-    if (err) {
-      console.error(`exec error: ${err}`);
-    }
-
-    bit = await ste.bus(ActPvt.BUNDLE_PIVOT, { src: "111.control" });
-
-    bit = await ste.bus(ActDsk.READ_DISK, { src: './work/111.control.js' })
-    var shade = bit.dskBit.dat;
-
-    bit = await ste.bus(ActDsk.WRITE_DISK, { src: './public/jsx/111.control.js', dat: shade })
+  bit = await ste.bus(ActPvt.UPDATE_PIVOT, { src: '111.control' })
 
     setTimeout(() => {
       if (bal.slv != null) bal.slv({ ctlBit: { idx: "update-control" } });
     }, 3);
-
-  });
 
   return cpy;
 };
@@ -75,14 +61,14 @@ export const createControl = (cpy: ControlModel, bal: ControlBit, ste: State) =>
   return cpy;
 };
 
-export const testControl = async (cpy: ControlModel, bal:ControlBit, ste: State) => {
+export const testControl = async (cpy: ControlModel, bal: ControlBit, ste: State) => {
 
-  bit = await ste.bus( ActCrd.READ_CARDANO, {})
+  bit = await ste.bus(ActCrd.READ_CARDANO, {})
 
   if (bal.slv != null) bal.slv({ condBit: { idx: "test-control", dat: {} } });
 
   return cpy;
-  };
+};
 
 
 var patch = (ste, type, bale) => ste.dispatch({ type, bale });
