@@ -16,6 +16,7 @@ const GAME =  require('./game')
 
 const CONTROL = require('../dist/111.control/hunt.js')
 const ActCtl = require('../dist/111.control/00.control.unit/control.action')
+const ActTrn = require('../dist/111.control/01.turn.unit/turn.action')
 
 //const STORE = require('../001.store/index.js')
 //const ActStr = require('../001.store/00.store.unit/store.action')
@@ -32,6 +33,7 @@ var bit;
 SPACE.hunt(ActSpc.INIT_SPACE, { val: 0, dat: MQTT, src: local })
 CONTROL.hunt(ActCtl.INIT_CONTROL, { val: 0, dat: MQTT, src: local })
 
+CONTROL.hunt(ActTrn.OPEN_TURN, {})
 
 console.log(JSON.stringify(bit))
 
@@ -58,13 +60,16 @@ async function shapeHexmap() {
   return bit
 }
 
-
-
 async function createWindow() {
 
   ipcMain.handle('dialog:openFile', handleFileOpen)
   ipcMain.handle('game:openGame', openGame)
   ipcMain.handle('space:shapeHexmap', shapeHexmap)
+
+  ipcMain.handle('control:updateTurn', async ( event, lst) => {
+    bit = await CONTROL.hunt(ActTrn.UPDATE_TURN, { lst })
+    return JSON.stringify(bit)
+  })
 
 
   ipcMain.handle('space:listFocus', async ( event, src) => {

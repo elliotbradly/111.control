@@ -24,6 +24,7 @@ const updateBlock = async (cpy, bal, ste) => {
     if (bric.bit.height == null)
         return bal.slv({ blkBit: { idx: "update-block", dat: bric } });
     if (rsp.height == bric.bit.height) {
+        bric.diff = 0;
         bal.slv({ blkBit: { idx: "update-block", dat: bric } });
         return cpy;
     }
@@ -36,7 +37,6 @@ const updateBlock = async (cpy, bal, ste) => {
     bric.bit = rsp;
     var delay = timeNow - timePast;
     bric.diff = delay;
-    bric.height = rsp.height;
     bal.slv({ blkBit: { idx: "update-block", dat: bric } });
     return cpy;
 };

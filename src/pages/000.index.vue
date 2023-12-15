@@ -43,15 +43,29 @@ const SHADE = inject('SHADE')
 
 var intervalID;
 
+var count = 0;
+var max = 1111;
+
 const outside = (val, event) => {
 
   //alert(val)
 
 }
 
-const response = (val, event) => {
+const response = async (val, event) => {
 
   console.log('rendering...')
+  count += 33;
+
+  if ( count < 1111 ) return
+
+  count = 0;
+
+  var lst = []
+  var bit = await window['electronAPI'].updateTurn( lst )
+  var puff = JSON.parse(bit)
+  console.log("puff " + JSON.stringify(puff))
+
 
 }
 
@@ -69,7 +83,7 @@ onMounted(async () => {
   }, true);
 
 
-  intervalID = setInterval(response, 1111)
+  intervalID = setInterval(response, 33 )
 
   //mountControl('on')
 })

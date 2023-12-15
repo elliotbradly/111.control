@@ -35,10 +35,8 @@ const updateMenu = async (cpy, bal, ste) => {
             ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: '------------' });
             bit = await ste.hunt(ActBlk.OPEN_BLOCK, { idx: 'blk00' });
             bit = await ste.hunt(ActBlk.WRITE_BLOCK, { idx: 'blk00' });
-            if (bit == null)
-                break;
             dat = bit.blkBit.dat;
-            if (dat == null)
+            if (bit == null)
                 break;
             var itm = JSON.stringify(dat);
             lst = itm.split(',');
