@@ -38,7 +38,7 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
-  lst = [ ActTrn.OPEN_TURN, ActTrn.UPDATE_TURN,  ActCtl.OPEN_CONTROL, ActCtl.UPDATE_CONTROL, ActCtl.CREATE_CONTROL, ActCtl.TEST_CONTROL]
+  lst = [ ActCtl.OPEN_CONTROL,   ActTrn.OPEN_TURN, ActTrn.UPDATE_TURN, ActCtl.UPDATE_CONTROL, ActCtl.CREATE_CONTROL, ActCtl.TEST_CONTROL]
 
   bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 4, ySpan: 12 })
   bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
