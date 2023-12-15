@@ -37,7 +37,10 @@ export const updateTurn = async (cpy: TurnModel, bal: TurnBit, ste: State) => {
 
 export const openTurn = async (cpy: TurnModel, bal:TurnBit, ste: State) => {
 
+
+  debugger
   bit = await ste.bus(ActBlk.OPEN_BLOCK, { idx: 'blk00' })
+  debugger
 
   bal.slv({ trnBit: { idx: "open-turn", dat:bit } });
 

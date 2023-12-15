@@ -26,7 +26,7 @@ const initMenu = async (cpy, bal, ste) => {
 exports.initMenu = initMenu;
 const updateMenu = async (cpy, bal, ste) => {
     //lst = [ActPvt.CLOUD_PIVOT, ActPvt.UPDATE_PIVOT, ActPvt.OPEN_PIVOT, ActPvt.EDIT_PIVOT, ActSpc.MERGE_SPACE, ActMnu.FOCUS_MENU, ActMnu.HEXMAP_MENU, , ActMnu.RENDER_MENU]
-    lst = [ActBlk.WRITE_BLOCK, ActCyp.UPDATE_CRYPTO, ActCar.READ_CARDANO];
+    lst = [ActBlk.WRITE_BLOCK, ActCyp.UPDATE_CRYPTO];
     bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 4, ySpan: 12 });
     bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat });
     src = bit.chcBit.src;
