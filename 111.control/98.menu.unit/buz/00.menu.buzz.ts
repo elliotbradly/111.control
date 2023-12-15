@@ -49,11 +49,28 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
     case ActTrn.OPEN_TURN:
       bit = await ste.hunt( ActTrn.OPEN_TURN, {})
+
+      if ( bit == null )  break
+      dat = bit.trnBit.dat;
+      if ( dat == null )  break
+      var itm = JSON.stringify(dat)
+      lst = itm.split(',')
+      lst.forEach((a) => ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: a }))
+      ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: '------------' })
       bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: 'open turn....' })
+
       break;
 
       case ActTrn.UPDATE_TURN:
       bit = await ste.hunt( ActTrn.UPDATE_TURN, {})
+      if ( bit == null )  break
+      dat = bit.trnBit.dat;
+      if ( dat == null )  break
+      var itm = JSON.stringify(dat)
+      lst = itm.split(',')
+      lst.forEach((a) => ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: a }))
+      ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: '------------' })
+
       bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: 'updating turn....' })
       break;
 

@@ -25,9 +25,10 @@ export const initTurn = async (cpy: TurnModel, bal: TurnBit, ste: State) => {
 
 export const updateTurn = async (cpy: TurnModel, bal: TurnBit, ste: State) => {
 
-  bit = await ste.hunt(ActBlk.WRITE_BLOCK, { idx: 'blk00' })
 
-  bal.slv({ trnBit: { idx: "update-turn" } });
+  bit = await ste.bus(ActBlk.WRITE_BLOCK, { idx: 'blk00' })
+
+  bal.slv({ trnBit: { idx: "update-turn", dat:bit } });
 
   return cpy;
 };
@@ -38,7 +39,7 @@ export const openTurn = async (cpy: TurnModel, bal:TurnBit, ste: State) => {
 
   bit = await ste.bus(ActBlk.OPEN_BLOCK, { idx: 'blk00' })
 
-  bal.slv({ trnBit: { idx: "open-turn" } });
+  bal.slv({ trnBit: { idx: "open-turn", dat:bit } });
 
   return cpy;
   };
