@@ -15,4 +15,11 @@ export class UpdateTurn implements Action {
  constructor(public bale: TurnBit) {}
 }
 
-export type Actions = | InitTurn | UpdateTurn ;
+export const OPEN_TURN = "[Open action] Open Turn";
+ export class OpenTurn implements Action {
+ readonly type = OPEN_TURN;
+ constructor(public bale: TurnBit) {}
+ }
+ 
+export type Actions = | InitTurn | UpdateTurn 
+| OpenTurn

@@ -15,26 +15,34 @@ import * as ActBlk from "../../act/block.action";
 
 var bit, val, idx, dex, lst, dat, src;
 
-
-
 export const initTurn = async (cpy: TurnModel, bal: TurnBit, ste: State) => {
 
 
-  bit = await ste.hunt(ActBlk.OPEN_BLOCK, { idx: 'blk00' })
-
+  bal.slv({ intBit: { idx: "init-turn" } });
 
   return cpy;
 };
 
 export const updateTurn = async (cpy: TurnModel, bal: TurnBit, ste: State) => {
 
-
-
-
   bit = await ste.hunt(ActBlk.WRITE_BLOCK, { idx: 'blk00' })
+
+  bal.slv({ trnBit: { idx: "update-turn" } });
 
   return cpy;
 };
+
+
+
+export const openTurn = async (cpy: TurnModel, bal:TurnBit, ste: State) => {
+
+  bit = await ste.bus(ActBlk.OPEN_BLOCK, { idx: 'blk00' })
+
+  bal.slv({ trnBit: { idx: "open-turn" } });
+
+  return cpy;
+  };
+
 
 
 import { TurnModel } from "../turn.model";

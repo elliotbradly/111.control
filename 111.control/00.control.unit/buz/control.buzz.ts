@@ -1,6 +1,7 @@
 import * as ActMnu from "../../98.menu.unit/menu.action";
 
 import * as ActCtr from "../../00.control.unit/control.action";
+import * as ActTrn from "../../01.turn.unit/turn.action";
 
 import * as ActCol from "../../97.collect.unit/collect.action";
 import * as ActBus from "../../99.bus.unit/bus.action";
@@ -18,6 +19,9 @@ export const initControl = async (cpy: ControlModel, bal: ControlBit, ste: State
   if (bal.dat != null) bit = await ste.hunt(ActBus.INIT_BUS, { idx: cpy.idx, lst: [ActCtr], dat: bal.dat, src: bal.src })
 
   if (bal.val == 1) patch(ste, ActMnu.INIT_MENU, bal);
+
+  bit = await ste.hunt( ActTrn.INIT_TURN, {})
+
   if (bal.slv != null) bal.slv({ intBit: { idx: "init-control" } });
 
   return cpy;

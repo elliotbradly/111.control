@@ -1,6 +1,8 @@
 import * as ActMnu from "../menu.action";
 
 import * as ActCtl from "../../00.control.unit/control.action";
+import * as ActTrn from "../../01.turn.unit/turn.action";
+
 //import * as ActFoc from "../../01.focus.unit/focus.action";
 //import * as ActPvt from "../../96.pivot.unit/pivot.action";
 
@@ -36,7 +38,7 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
-  lst = [ActCtl.OPEN_CONTROL, ActCtl.UPDATE_CONTROL, ActCtl.CREATE_CONTROL, ActCtl.TEST_CONTROL]
+  lst = [ ActTrn.OPEN_TURN, ActTrn.UPDATE_TURN,  ActCtl.OPEN_CONTROL, ActCtl.UPDATE_CONTROL, ActCtl.CREATE_CONTROL, ActCtl.TEST_CONTROL]
 
   bit = await ste.bus(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 4, ySpan: 12 })
   bit = await ste.bus(ActChc.OPEN_CHOICE, { dat: { clr0: Color.BLACK, clr1: Color.YELLOW }, src: Align.VERTICAL, lst, net: bit.grdBit.dat })
@@ -44,6 +46,16 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
   src = bit.chcBit.src;
 
   switch (src) {
+
+    case ActTrn.OPEN_TURN:
+      bit = await ste.hunt( ActTrn.OPEN_TURN, {})
+      bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: 'open turn....' })
+      break;
+
+      case ActTrn.UPDATE_TURN:
+      bit = await ste.hunt( ActTrn.UPDATE_TURN, {})
+      bit = await ste.bus(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: 'updating turn....' })
+      break;
 
     case ActCtl.UPDATE_CONTROL:
       bit = await ste.hunt(ActCtl.UPDATE_CONTROL, {})
