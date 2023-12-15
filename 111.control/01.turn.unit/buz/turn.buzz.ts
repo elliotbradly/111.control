@@ -28,7 +28,19 @@ export const updateTurn = async (cpy: TurnModel, bal: TurnBit, ste: State) => {
 
   bit = await ste.bus(ActBlk.WRITE_BLOCK, { idx: 'blk00' })
 
-  bal.slv({ trnBit: { idx: "update-turn", dat:bit } });
+  var diff = bit.blkBit.dat.diff
+
+  if ( diff == 0 ){
+
+    bal.slv({ trnBit: { idx: "update-turn", dat:bit } });
+    return cpy
+  }
+
+  diff
+
+  //autho code to maniuplate
+  debugger
+
 
   return cpy;
 };
@@ -38,9 +50,9 @@ export const updateTurn = async (cpy: TurnModel, bal: TurnBit, ste: State) => {
 export const openTurn = async (cpy: TurnModel, bal:TurnBit, ste: State) => {
 
 
-  debugger
+
   bit = await ste.bus(ActBlk.OPEN_BLOCK, { idx: 'blk00' })
-  debugger
+
 
   bal.slv({ trnBit: { idx: "open-turn", dat:bit } });
 

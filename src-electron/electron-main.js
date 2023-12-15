@@ -67,6 +67,7 @@ async function createWindow() {
   ipcMain.handle('space:shapeHexmap', shapeHexmap)
 
   ipcMain.handle('control:updateTurn', async ( event, lst) => {
+    if ( lst == null ) lst = ['idle']
     bit = await CONTROL.hunt(ActTrn.UPDATE_TURN, { lst })
     return JSON.stringify(bit)
   })

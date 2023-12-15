@@ -12,7 +12,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   forwardFocus: (idx)=> ipcRenderer.invoke('space:forwardFocus', idx),
   backwardFocus: (idx)=> ipcRenderer.invoke('space:backwardFocus', idx),
   listFocus: (src)=> ipcRenderer.invoke('space:listFocus', src),
-  updateTurn: (src)=> ipcRenderer.invoke('control:updateTurn', src),
+  updateTurn: (lst)=> ipcRenderer.invoke('control:updateTurn', lst),
 })
 
 contextBridge.exposeInMainWorld('electron', {
