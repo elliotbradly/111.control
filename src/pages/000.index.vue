@@ -41,7 +41,7 @@ var intervalID;
 
 const outside = (val, event)=>{
 
-  alert(val)
+  //alert(val)
 
 }
 
@@ -52,7 +52,7 @@ console.log( 'rendering...' )
 }
 
 onMounted(async () => {
-  //mount('on')
+  mount('on')
 
   intervalID = setInterval( response, 1111)
 
