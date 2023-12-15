@@ -64,7 +64,7 @@ onMounted(async () => {
 
       location.reload();
 
-    }, 111);
+    }, 33);
 
   }, true);
 
