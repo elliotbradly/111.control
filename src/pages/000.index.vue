@@ -61,16 +61,20 @@ const response = async (val, event) => {
 
   count = 0;
 
-  var lst = []
-  var bit = await window['electronAPI'].updateTurn( lst )
-  var puff = JSON.parse(bit)
-  console.log("puff " + JSON.stringify(puff))
+  //var lst = []
+  //var bit = await window['electronAPI'].updateTurn( lst )
+  //var puff = JSON.parse(bit)
+  //console.log("puff " + JSON.stringify(puff))
 
 
 }
 
 onMounted(async () => {
   mount('on')
+
+
+  var bit = await window['electronAPI'].openGame()
+
 
   window.addEventListener('resize', function (event) {
 

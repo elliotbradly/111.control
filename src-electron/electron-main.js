@@ -12,19 +12,23 @@ const PORT = 1001;
 
 const GAME =  require('./game')
 
-//every time you restart you recompile the control source code
 
-const CONTROL = require('../dist/111.control/hunt.js')
-const ActCtl = require('../dist/111.control/00.control.unit/control.action')
-const ActTrn = require('../dist/111.control/01.turn.unit/turn.action')
+//every time you restart you recompile the control source code
 
 //const STORE = require('../001.store/index.js')
 //const ActStr = require('../001.store/00.store.unit/store.action')
+
 
 const SPACE = require('../002.space/index.js')
 const ActSpc = require('../002.space/00.space.unit/space.action')
 const ActMap = require('../002.space/03.hexmap.unit/hexmap.action')
 const ActFoc = require('../002.space/01.focus.unit/focus.action')
+
+
+const CONTROL = require('../dist/111.control/hunt.js')
+const ActCtl = require('../dist/111.control/00.control.unit/control.action')
+const ActTrn = require('../dist/111.control/01.turn.unit/turn.action')
+
 
 const local = 'mqtt://localhost:' + PORT;
 
@@ -32,10 +36,6 @@ var bit;
 
 SPACE.hunt(ActSpc.INIT_SPACE, { val: 0, dat: MQTT, src: local })
 CONTROL.hunt(ActCtl.INIT_CONTROL, { val: 0, dat: MQTT, src: local })
-
-CONTROL.hunt(ActTrn.OPEN_TURN, {})
-
-console.log(JSON.stringify(bit))
 
 async function handleFileOpen() {
   const { canceled, filePaths } = await dialog.showOpenDialog({})
@@ -46,7 +46,15 @@ async function handleFileOpen() {
 
 async function openGame() {
 
-  GAME.open( SPACE );
+  const PLAY = require('./000.play/hunt.js')
+  const ActCtl = require('./000.play/00.control.unit/control.action')
+
+
+  bit = await PLAY.hunt( ActCtl.INIT_CONTROL, {})
+
+
+
+  //GAME.open( SPACE );
 
   //bit = await SPACE.hunt(ActFoc.WRITE_FOCUS, { foc: 'foc00' })
   //bit = await SPACE.hunt(ActFoc.WRITE_FOCUS, { foc: 'foc00' })

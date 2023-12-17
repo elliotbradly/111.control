@@ -1,0 +1,12 @@
+export declare const INIT_DISK = "[Disk action] Init Disk";
+export declare const UPDATE_DISK = "[Disk action] Update Disk";
+export declare const READ_DISK = "[Disk action] Read Disk";
+export declare const WRITE_DISK = "[Disk action] Write Disk";
+export declare const INDEX_DISK = "[Index action] Index Disk";
+export declare const LOAD_LIST_DISK = "[Load_list action] Load_list Disk";
+export declare const COPY_DISK = "[Copy action] Copy Disk";
+export declare const FRAME_DISK = "[Frame action] Frame Disk";
+export declare const BATCH_DISK = "[Batch action] Batch Disk";
+export declare const TRASH_DISK = "[Trash action] Trash Disk";
+export declare const ENSURE_DISK = "[Ensure action] Ensure Disk";
+export declare const DELETE_DISK = "[Delete action] Delete Disk";

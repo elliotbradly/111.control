@@ -1,0 +1,10 @@
+export declare const SPACE: string;
+export declare const TIMELINE: string;
+export declare const MENU_SINGLE: string;
+export declare const CLEAN: string;
+export declare const CYAN: string;
+export declare const RED: string;
+export declare const GREEN: string;
+export declare const BLUE: string;
+export declare const YELLOW: string;
+export declare const MAGENTA: string;
