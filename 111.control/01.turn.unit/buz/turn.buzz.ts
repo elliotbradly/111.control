@@ -39,9 +39,8 @@ export const updateTurn = async (cpy: TurnModel, bal: TurnBit, ste: State) => {
   diff
 
   //autho code to maniuplate
-  debugger
 
-
+  bal.slv({ trnBit: { idx: "update-turn", dat:bit } });
   return cpy;
 };
 
